@@ -10,7 +10,7 @@ class FuncionariosDAO extends Conexao
         parent::__construct();
     }
 
-    public function getTodosFuncionarios(): array
+    public function getFuncionarios(): array
     {
         $funcionarios = $this->pdo
             ->query('SELECT
@@ -43,7 +43,7 @@ class FuncionariosDAO extends Conexao
         ]);
     }
 
-    public function updateLoja(FuncionarioModel $funcionario): void
+    public function updateFuncionario(FuncionarioModel $funcionario): void
     {
         $statement = $this->pdo
             ->prepare('UPDATE funcionario SET 
@@ -61,7 +61,7 @@ class FuncionariosDAO extends Conexao
         ]);
     }
 
-    public function deleteLoja(FuncionarioModel $funcionario): void 
+    public function deleteFuncionario(FuncionarioModel $funcionario): void 
     {
         $statement = $this->pdo
         ->prepare("DELETE FROM funcionario where id = :id");
