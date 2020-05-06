@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use App\DAO\FuncionariosDAO;
+use App\Models\FuncionarioModel;
 
 final class FuncionarioController
 {
@@ -16,4 +17,6 @@ final class FuncionarioController
 
         return $response;
     }
+
+ 
 }
