@@ -10,7 +10,7 @@ abstract class Conexao
     {
         $host   = 'localhost';
         $user   = 'root';
-        $pass   = '12345';
+        $pass   = '';
         $dbname = 'api';
 
         $dsn = "mysql:host={$host};dbname={$dbname}";
