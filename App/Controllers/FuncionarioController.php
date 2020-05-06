@@ -37,7 +37,7 @@ final class FuncionarioController
         return $response;
     }
 
-    public function updateLoja(Request $request, Response $response, array $args) : Response
+    public function updateFuncionario(Request $request, Response $response, array $args) : Response
     {
         $data = $request->getParsedBody();
 
@@ -49,16 +49,16 @@ final class FuncionarioController
              ->setTelefone($data['telefone'])
              ->setId($data['id']);
 
-        if ($funcionarioDAO->updateFuncionario($funcionario)) {
+        $funcionarioDAO->updateFuncionario($funcionario);
             $response = $response->withJson([
-                "message" => "Loja Atualizada Com Sucesso"
+                "message" => "Funcionario atualizado com sucesso"
             ]);
             $response = $response->withStatus(200);      
-        }
+        
         return $response;
     }
 
-    public function deleteLoja(Request $request, Response $response, array $args) : Response
+    public function deleteFuncionario(Request $request, Response $response, array $args) : Response
     {
         $data = $request->getParsedBody();
 
