@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DAO;
+use App\Models\FuncionarioModel;
 
 class FuncionariosDAO extends Conexao
 {
@@ -9,7 +10,7 @@ class FuncionariosDAO extends Conexao
         parent::__construct();
     }
 
-    public function getTodosFuncionarios(): array
+    public function getFuncionarios(): array
     {
         $funcionarios = $this->pdo
             ->query('SELECT
@@ -22,5 +23,50 @@ class FuncionariosDAO extends Conexao
             ->fetchALL(\PDO::FETCH_ASSOC);
 
         return $funcionarios;
+    }
+
+    public function insertFuncionario(FuncionarioModel $funcionario): void
+    {
+        $statement = $this->pdo
+            ->prepare('INSERT INTO funcionario VALUES(
+                null,
+                :nome,
+                :sexo,
+                :telefone,
+                :endereco
+            );');
+        $statement->execute([
+            'nome' => $funcionario->getNome(),
+            'sexo' => $funcionario->getSexo(), 
+            'telefone' => $funcionario->getTelefone(),
+            'endereco' => $funcionario->getEndereco()
+        ]);
+    }
+
+    public function updateFuncionario(FuncionarioModel $funcionario): void
+    {
+        $statement = $this->pdo
+            ->prepare('UPDATE funcionario SET 
+                    nome = :nome,
+                    sexo = :sexo, 
+                    telefone = :telefone, 
+                    endereco = :endereco 
+                   WHERE id = :id');
+        $statement->execute([
+            'nome' => $funcionario->getNome(),
+            'sexo' => $funcionario->getSexo(), 
+            'telefone' => $funcionario->getTelefone(),
+            'endereco' => $funcionario->getEndereco(),
+            'id' => $funcionario->getId()
+        ]);
+    }
+
+    public function deleteFuncionario(FuncionarioModel $funcionario): void 
+    {
+        $statement = $this->pdo
+        ->prepare("DELETE FROM funcionario where id = :id");
+        $statement->execute([
+            'id' => $funcionario->getId()
+        ]);
     }
 }
